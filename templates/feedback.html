@@ -3,14 +3,53 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Feedback</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - VIT Bus Management</title>
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body class="p-10">
-    <h1 class="text-3xl font-bold mb-4">Feedback</h1>
-    <p>We value your feedback. Please contact administration for specific queries.</p>
-    <a href="{{ url_for('home') }}" class="text-indigo-500 hover:text-indigo-800 mt-4 inline-block">Back to Home</a>
+<body class="text-gray-600 body-font relative">
+    <div class="container px-5 py-24 mx-auto">
+        <div class="flex flex-col text-center w-full mb-12">
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Contact Us</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">We'd love to hear from you! Please share your feedback
+                or report any issues.</p>
+        </div>
+        <div class="lg:w-1/2 md:w-2/3 mx-auto">
+            <form action="{{ url_for('feedback') }}" method="POST">
+                <div class="flex flex-wrap -m-2">
+                    <div class="p-2 w-full">
+                        <div class="relative">
+                            <label for="message" class="leading-7 text-sm text-gray-600">Message</label>
+                            <textarea id="message" name="message"
+                                class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                                required></textarea>
+                        </div>
+                    </div>
+                    <div class="p-2 w-full">
+                        <button
+                            class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Submit
+                            Feedback</button>
+                    </div>
+                </div>
+            </form>
+            <div class="flex justify-center mt-6">
+                <a href="{{ url_for('home') }}" class="text-indigo-500">Back to Home</a>
+            </div>
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="mt-4">
+                {% for category, message in messages %}
+                <div class="p-2 bg-green-100 text-green-700 rounded text-center">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+        </div>
+    </div>
 </body>
 
 </html>
