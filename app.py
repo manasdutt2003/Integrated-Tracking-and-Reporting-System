@@ -1,6 +1,8 @@
 import os
 import google.generativeai as genai
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
+from send_notification import send_email_notification
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'default_secret_key')  # Set a secure secret key
@@ -92,7 +94,6 @@ def send_notification():
     # Call the email function
     send_email_notification(recipient_email, subject, body)
 
-    flash("Notification sent successfully!", "success")  # Show a success message
     flash("Notification sent successfully!", "success")  # Show a success message
     return redirect(url_for('home'))  # Redirect back to home page after sending the notification
 
