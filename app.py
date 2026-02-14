@@ -5,7 +5,7 @@ from send_notification import send_email_notification
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.secret_key = os.getenv('FLASK_SECRET_KEY', 'default_secret_key')  # Set a secure secret key
+app.secret_key = "PASTE_YOUR_SECRET_KEY_HERE" # <--- REPLACE THIS (e.g., 'my_super_secret_key')
 
 # Mock users with hashed passwords
 users = {
@@ -104,10 +104,13 @@ def chat():
 @app.route('/api/chat', methods=['POST'])
 def chat_api():
     user_message = request.json.get('message')
+    # --- HARDCODED CREDENTIALS ---
     api_key = os.getenv("GEMINI_API_KEY")
+    # -----------------------------
     
     if not api_key:
-        return jsonify({"response": "Error: GEMINI_API_KEY not configured."}), 500
+         return jsonify({"response": "Error: GEMINI_API_KEY environment variable not set."}), 500
+
 
     try:
         genai.configure(api_key=api_key)

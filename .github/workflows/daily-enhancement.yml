@@ -1,0 +1,35 @@
+name: Fleet Simulation Update
+
+on:
+  schedule:
+    # Run at minute 12 past every 2nd hour
+    - cron: '12 */2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-simulation:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Run Fleet Simulation
+      run: |
+        python simulate_fleet.py
+
+    - name: Commit and Push Changes
+      run: |
+        git config --global user.name 'Manas Dutt'
+        git config --global user.email 'manasdutt2003@gmail.com'
+        git add data/fleet_stats.json
+        git commit -m "chore: update fleet simulation data [skip ci]" || echo "No changes to commit"
+        git push

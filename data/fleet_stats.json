@@ -1,0 +1,8 @@
+{
+  "date": "2026-02-12",
+  "total_active_buses": 49,
+  "busiest_route": "Route D",
+  "average_delay_minutes": 1.5,
+  "maintenance_schedule": "3 buses scheduled",
+  "passenger_satisfaction": "86%"
+}

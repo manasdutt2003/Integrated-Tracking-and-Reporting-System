@@ -3,8 +3,10 @@ import os
 from email.mime.text import MIMEText
 
 def send_email_notification(to_email, subject, body):
-    sender_email = os.getenv('EMAIL_USER')
-    sender_password = os.getenv('EMAIL_PASS')
+    # --- HARDCODED CREDENTIALS ---
+    sender_email = "your_email@gmail.com" # <--- REPLACE THIS
+    sender_password = "your_app_password" # <--- REPLACE THIS
+    # -----------------------------
     
     if not sender_email or not sender_password:
         print("Email credentials not configured.")
