@@ -65,3 +65,7 @@ gunicorn app:app
 - Accounts are two in-memory demo users; there is no registration or database.
 - Feedback messages are logged, not stored.
 - Live location comes from the fleet provider's tracking links, not from this app.
+
+## Automation
+
+`n8n/bus-assistant-webhook.json` is an importable [n8n](https://n8n.io) workflow that exposes the assistant as a webhook. See `n8n/README.md`.
