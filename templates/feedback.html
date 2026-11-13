@@ -41,7 +41,7 @@
             {% if messages %}
             <div class="mt-4">
                 {% for category, message in messages %}
-                <div class="p-2 bg-green-100 text-green-700 rounded text-center">
+                <div role="alert" class="p-2 rounded text-center {{ 'bg-red-100 text-red-700' if category == 'error' else 'bg-green-100 text-green-700' }}">
                     {{ message }}
                 </div>
                 {% endfor %}

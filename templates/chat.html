@@ -42,69 +42,63 @@
         <div class="flex">
             <input type="text" id="user-input"
                 class="flex-grow p-3 border rounded-l focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                placeholder="Type your question..." onkeypress="handleEnter(event)">
+                placeholder="Type your question..." maxlength="500" onkeydown="handleEnter(event)">
             <button onclick="sendMessage()"
                 class="bg-indigo-500 text-white p-3 rounded-r hover:bg-indigo-600 transition">Send</button>
         </div>
     </div>
 
     <script>
+        const chatBox = document.getElementById('chat-box');
+        const input = document.getElementById('user-input');
+
+        // Messages are added with textContent, never innerHTML, so nothing the
+        // user types or the model returns can run as markup or script.
+        function addMessage(text, kind) {
+            const styles = {
+                user: ['flex items-end justify-end', 'bg-indigo-500 text-white'],
+                bot: ['flex items-start', 'bg-gray-200 text-gray-900'],
+                loading: ['flex items-start', 'bg-gray-200 text-gray-500 animate-pulse'],
+                error: ['flex items-start', 'bg-red-100 text-red-700'],
+            }[kind];
+            const row = document.createElement('div');
+            row.className = styles[0];
+            const bubble = document.createElement('div');
+            bubble.className = `${styles[1]} p-3 rounded-lg text-sm max-w-xs whitespace-pre-wrap`;
+            bubble.textContent = text;
+            row.append(bubble);
+            chatBox.append(row);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            return row;
+        }
+
+        let busy = false;
+
         async function sendMessage() {
-            const input = document.getElementById('user-input');
             const message = input.value.trim();
-            const chatBox = document.getElementById('chat-box');
+            if (!message || busy) return;
 
-            if (!message) return;
-
-            // Add User Message
-            chatBox.innerHTML += `
-                <div class="flex items-end justify-end">
-                    <div class="bg-indigo-500 text-white p-3 rounded-lg text-sm max-w-xs">
-                        ${message}
-                    </div>
-                </div>`;
-
+            busy = true;
+            addMessage(message, 'user');
             input.value = '';
-            chatBox.scrollTop = chatBox.scrollHeight;
-
-            // Show Loading
-            const loadingId = 'loading-' + Date.now();
-            chatBox.innerHTML += `
-                <div id="${loadingId}" class="flex items-start">
-                    <div class="bg-gray-200 p-3 rounded-lg text-sm text-gray-500 max-w-xs animate-pulse">
-                        Thinking...
-                    </div>
-                </div>`;
-            chatBox.scrollTop = chatBox.scrollHeight;
+            const loading = addMessage('Thinking...', 'loading');
 
             try {
-                const response = await fetch('/api/chat', {
+                const response = await fetch("{{ url_for('chat_api') }}", {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: message })
+                    body: JSON.stringify({ message }),
                 });
                 const data = await response.json();
-
-                // Remove Loading
-                document.getElementById(loadingId).remove();
-
-                // Add AI Message
-                chatBox.innerHTML += `
-                    <div class="flex items-start">
-                        <div class="bg-gray-200 p-3 rounded-lg text-sm text-gray-900 max-w-xs">
-                            ${data.response}
-                        </div>
-                    </div>`;
+                loading.remove();
+                addMessage(data.response || 'No response received.', response.ok ? 'bot' : 'error');
             } catch (error) {
-                document.getElementById(loadingId).remove();
-                chatBox.innerHTML += `
-                    <div class="flex items-start">
-                        <div class="bg-red-100 text-red-700 p-3 rounded-lg text-sm max-w-xs">
-                            Sorry, I encountered an error. Please try again.
-                        </div>
-                    </div>`;
+                loading.remove();
+                addMessage('Sorry, I encountered an error. Please try again.', 'error');
+            } finally {
+                busy = false;
+                input.focus();
             }
-            chatBox.scrollTop = chatBox.scrollHeight;
         }
 
         function handleEnter(e) {

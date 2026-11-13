@@ -1,30 +1,41 @@
-import smtplib
+"""Email notifications sent through Gmail SMTP."""
+
+from __future__ import annotations
+
+import logging
 import os
+import smtplib
 from email.mime.text import MIMEText
 
-def send_email_notification(to_email, subject, body):
-    sender_email = os.getenv('EMAIL_USER')
-    sender_password = os.getenv('EMAIL_PASS')
-    
-    if not sender_email or not sender_password:
-        print("Email credentials not configured.")
-        return
+logger = logging.getLogger(__name__)
 
-    # Add live tracking link to the body of the email
-    live_tracking_link = "https://app.fleetx.io/live/share/v2/eJwFwYkNACAIBLCJLkF%2BxlFkDWe3XUSm7xZxmA6i06GzBSXeyNlRGm185gPhDgrV?timezone=null" 
-    body += f"\n\nYou can track your bus live here: {live_tracking_link}"
+SMTP_HOST = os.getenv("SMTP_HOST", "smtp.gmail.com")
+SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
+
+
+def send_email_notification(to_email: str, subject: str, body: str) -> bool:
+    """Send a plain-text email. Returns True only when it was accepted."""
+    sender_email = os.getenv("EMAIL_USER")
+    sender_password = os.getenv("EMAIL_PASS")
+    if not sender_email or not sender_password:
+        logger.warning("EMAIL_USER / EMAIL_PASS are not configured; email not sent.")
+        return False
+
+    tracking_link = os.getenv("LIVE_TRACKING_URL")
+    if tracking_link:
+        body += f"\n\nYou can track your bus live here: {tracking_link}"
+
+    message = MIMEText(body)
+    message["From"] = sender_email
+    message["To"] = to_email
+    message["Subject"] = subject
 
     try:
-        server = smtplib.SMTP("smtp.gmail.com", 587)
-        server.starttls()
-        server.login(sender_email, sender_password)
-
-        msg = MIMEText(body)
-        msg['From'] = sender_email
-        msg['To'] = to_email
-        msg['Subject'] = subject
-
-        server.sendmail(sender_email, to_email, msg.as_string())
-        server.quit()
-    except Exception as e:
-        print(f"Error sending email: {str(e)}")
+        with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=15) as server:
+            server.starttls()
+            server.login(sender_email, sender_password)
+            server.sendmail(sender_email, [to_email], message.as_string())
+        return True
+    except (smtplib.SMTPException, OSError):
+        logger.exception("Could not send email")
+        return False

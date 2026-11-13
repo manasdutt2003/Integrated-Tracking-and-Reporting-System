@@ -1,0 +1,242 @@
+[
+  {
+    "route_number": "2",
+    "route": "Aynavaram",
+    "vehicle_number": "TN 23 CC 9535",
+    "tracking_link": "https://tinyurl.com/jtdsw3s7"
+  },
+  {
+    "route_number": "2A",
+    "route": "Aynavaram",
+    "vehicle_number": "TN 11 AM 7935",
+    "tracking_link": null
+  },
+  {
+    "route_number": "3",
+    "route": "Annanagar Roundtana",
+    "vehicle_number": "TN 23 CA 9235",
+    "tracking_link": "https://tinyurl.com/5hd35jrj"
+  },
+  {
+    "route_number": "3A",
+    "route": "Annanagar Roundtana",
+    "vehicle_number": "TN 23 AK 3435",
+    "tracking_link": null
+  },
+  {
+    "route_number": "4",
+    "route": "Noolambur",
+    "vehicle_number": "TN 11 AM 7135",
+    "tracking_link": "https://tinyurl.com/5ey8th46"
+  },
+  {
+    "route_number": "4A",
+    "route": "Noolambur",
+    "vehicle_number": "TN 23 BB 4935",
+    "tracking_link": null
+  },
+  {
+    "route_number": "6",
+    "route": "Purasaiwalkam",
+    "vehicle_number": "TN 23 BB 5335",
+    "tracking_link": "https://tinyurl.com/3t4ekspj"
+  },
+  {
+    "route_number": "6A",
+    "route": "Purasaiwalkam",
+    "vehicle_number": "TN 11 AM 7335",
+    "tracking_link": null
+  },
+  {
+    "route_number": "7",
+    "route": "Avichi School",
+    "vehicle_number": "TN 23 AM 9535",
+    "tracking_link": "https://tinyurl.com/2x7xm2x9"
+  },
+  {
+    "route_number": "7A",
+    "route": "Avichi School",
+    "vehicle_number": "TN 23 AK 3735",
+    "tracking_link": null
+  },
+  {
+    "route_number": "9",
+    "route": "Ramapuram Junction",
+    "vehicle_number": "TN 11 AB 3835",
+    "tracking_link": "https://tinyurl.com/2t7j5smu"
+  },
+  {
+    "route_number": "9A",
+    "route": "Ramapuram Junction",
+    "vehicle_number": "TN 21 AH 2335",
+    "tracking_link": null
+  },
+  {
+    "route_number": "11",
+    "route": "Sterling Road",
+    "vehicle_number": "TN 23 AM 9635",
+    "tracking_link": "https://tinyurl.com/4p7cy4ux"
+  },
+  {
+    "route_number": "11A",
+    "route": "Sterling Road",
+    "vehicle_number": "TN 23 AK 4555",
+    "tracking_link": null
+  },
+  {
+    "route_number": "12",
+    "route": "Redhills",
+    "vehicle_number": "TN 11 AH 2535",
+    "tracking_link": "https://tinyurl.com/3k4zry8x"
+  },
+  {
+    "route_number": "12A",
+    "route": "Redhills",
+    "vehicle_number": "TN 11 AM 7535",
+    "tracking_link": null
+  },
+  {
+    "route_number": "16",
+    "route": "Adayar Aavin",
+    "vehicle_number": "TN 23 AM 9235",
+    "tracking_link": "https://tinyurl.com/yc5h6d25"
+  },
+  {
+    "route_number": "16A",
+    "route": "Adayar Aavin",
+    "vehicle_number": "TN 21 AT 1408",
+    "tracking_link": null
+  },
+  {
+    "route_number": "17",
+    "route": "Kutchery Road",
+    "vehicle_number": "TN 23 CC 9635",
+    "tracking_link": "https://tinyurl.com/45w4w8z5"
+  },
+  {
+    "route_number": "17A",
+    "route": "Kutchery Road",
+    "vehicle_number": "TN 21 AL 4360",
+    "tracking_link": null
+  },
+  {
+    "route_number": "18",
+    "route": "Kundrathur",
+    "vehicle_number": "TN 23 AK 4235",
+    "tracking_link": "https://tinyurl.com/ypn9ncjt"
+  },
+  {
+    "route_number": "18A",
+    "route": "Kundrathur",
+    "vehicle_number": "TN 21 AU 7393",
+    "tracking_link": null
+  },
+  {
+    "route_number": "19",
+    "route": "Natraja Theatre",
+    "vehicle_number": "TN 11 AH 2435",
+    "tracking_link": "https://tinyurl.com/53nwmpj5"
+  },
+  {
+    "route_number": "19A",
+    "route": "Natraja Theatre",
+    "vehicle_number": "TN 21 AT 4843",
+    "tracking_link": null
+  },
+  {
+    "route_number": "20",
+    "route": "Adayar",
+    "vehicle_number": "TN 23 AM 9135",
+    "tracking_link": "https://tinyurl.com/mt6fxysc"
+  },
+  {
+    "route_number": "20A",
+    "route": "Adayar",
+    "vehicle_number": "TN 21 AU 1450",
+    "tracking_link": null
+  },
+  {
+    "route_number": "21",
+    "route": "Chengalpattu",
+    "vehicle_number": "TN 11 AB 3935",
+    "tracking_link": "https://tinyurl.com/26bhke4a"
+  },
+  {
+    "route_number": "21A",
+    "route": "Potheri",
+    "vehicle_number": "TN 21 AT 1407",
+    "tracking_link": null
+  },
+  {
+    "route_number": "22",
+    "route": "Mcc",
+    "vehicle_number": "TN 21 AT 1779",
+    "tracking_link": "https://tinyurl.com/2kbd23tp"
+  },
+  {
+    "route_number": "22A",
+    "route": "Mcc",
+    "vehicle_number": "TN 21 AT 1303",
+    "tracking_link": null
+  },
+  {
+    "route_number": "23",
+    "route": "Moolakadai",
+    "vehicle_number": "TN 23 CA 9135",
+    "tracking_link": "https://tinyurl.com/4e7cdaav"
+  },
+  {
+    "route_number": "23A",
+    "route": "Moolakadai",
+    "vehicle_number": "TN 21 AU 0265",
+    "tracking_link": null
+  },
+  {
+    "route_number": "24",
+    "route": "Amma Nana",
+    "vehicle_number": "TN 23 AK 4335",
+    "tracking_link": "https://tinyurl.com/yvyknthx"
+  },
+  {
+    "route_number": "24A",
+    "route": "Amma Nana",
+    "vehicle_number": "TN 21 AT 4806",
+    "tracking_link": null
+  },
+  {
+    "route_number": "26",
+    "route": "Santhosapuram",
+    "vehicle_number": "TN 11 AB 3735",
+    "tracking_link": "https://tinyurl.com/5b7dwuhk"
+  },
+  {
+    "route_number": "26A",
+    "route": "Santhosapuram",
+    "vehicle_number": "TN 21 AU 6520",
+    "tracking_link": null
+  },
+  {
+    "route_number": "28",
+    "route": "Icf",
+    "vehicle_number": "TN 11 AH 2235",
+    "tracking_link": "https://tinyurl.com/53f93muc"
+  },
+  {
+    "route_number": "28A",
+    "route": "Icf",
+    "vehicle_number": "TN 21 AU 6622",
+    "tracking_link": null
+  },
+  {
+    "route_number": "36",
+    "route": "Madhavaram Roundtana",
+    "vehicle_number": "TN 21 AT 1481",
+    "tracking_link": "https://tinyurl.com/e47bec3e"
+  },
+  {
+    "route_number": "38",
+    "route": "Golden Flats",
+    "vehicle_number": "TN 11 AM 7635",
+    "tracking_link": "https://tinyurl.com/msn9r3ve"
+  }
+]

@@ -3,24 +3,30 @@
 
 <head>
     <meta charset="utf-8">
-    <title> Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - VIT Bus Management</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="{{ url_for('static', filename='valid.js') }}"> </script>
 </head>
 
 <body>
-    <form class="T">
+    <div class="T">
         <h1>VIT BUS MANAGEMENT SYSTEM</h1>
-    </form>
-    <form class="box" action="{{ url_for('login') }}" method="POST" onSubmit="return validate( );">
-        <h1>
-            login
-        </h1>
+    </div>
+    <form class="box" action="{{ url_for('login') }}" method="POST">
+        <h1>Login</h1>
 
-        <input type="text" name="username" placeholder="Enter Username" id="username">
-        <input type="password" name="password" placeholder="Enter Password" id="password">
-        <input type="submit" name="Login" value="Login" id="Login">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+        <p class="flash flash-{{ category }}" role="alert">{{ message }}</p>
+        {% endfor %}
+        {% endwith %}
 
+        <input type="text" name="username" placeholder="Enter Username" id="username" autocomplete="username"
+            required autofocus>
+        <input type="password" name="password" placeholder="Enter Password" id="password"
+            autocomplete="current-password" required>
+        <input type="submit" value="Login" id="Login">
+        <p class="hint"><a href="{{ url_for('home') }}">Back to Home</a></p>
     </form>
 </body>
 
