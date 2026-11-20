@@ -28,9 +28,11 @@ from send_notification import send_email_notification
 BASE_DIR = Path(__file__).resolve().parent
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 MAX_CHAT_MESSAGE_LENGTH = 500
+MAX_SEARCH_QUERY_LENGTH = 100
+REQUIRED_BUS_FIELDS = ("route_number", "route", "vehicle_number", "tracking_link")
 EMAIL_PATTERN = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO").upper())
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
@@ -48,9 +50,36 @@ app.config.update(
 )
 
 
+def validate_buses(buses: object) -> list[dict]:
+    """Check the shape of the bus data and return it, or raise ValueError."""
+    if not isinstance(buses, list):
+        raise ValueError("buses.json must contain a list")
+    for index, bus in enumerate(buses):
+        if not isinstance(bus, dict):
+            raise ValueError(f"buses.json entry {index} is not an object")
+        missing = [field for field in REQUIRED_BUS_FIELDS if field not in bus]
+        if missing:
+            raise ValueError(f"buses.json entry {index} is missing: {', '.join(missing)}")
+    return buses
+
+
 def load_buses() -> list[dict]:
     with open(BASE_DIR / "data" / "buses.json", encoding="utf-8") as handle:
-        return json.load(handle)
+        return validate_buses(json.load(handle))
+
+
+def search_buses(buses: list[dict], query: str) -> list[dict]:
+    """Case-insensitive substring match on route number, area or vehicle number."""
+    needle = query.strip().lower()
+    if not needle:
+        return list(buses)
+    return [
+        bus
+        for bus in buses
+        if needle in str(bus["route_number"]).lower()
+        or needle in str(bus["route"]).lower()
+        or needle in str(bus["vehicle_number"]).lower()
+    ]
 
 
 def load_users() -> dict[str, str]:
@@ -99,6 +128,11 @@ def root():
     return redirect(url_for("home"))
 
 
+@app.route("/healthz")
+def healthz():
+    return jsonify({"status": "ok", "buses": len(BUSES)})
+
+
 @app.route("/home")
 def home():
     return render_template("home.html")
@@ -136,7 +170,8 @@ def search():
 
 @app.route("/api/buses")
 def buses_api():
-    return jsonify(BUSES)
+    query = (request.args.get("q") or "")[:MAX_SEARCH_QUERY_LENGTH]
+    return jsonify(search_buses(BUSES, query))
 
 
 @app.route("/login", methods=["GET", "POST"])
